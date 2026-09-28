@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Mía & Pikachu 🎵</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFD700 0%, #FFF44F 50%, #87CEEB 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .falling-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 24px;
+            animation: fall 6s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 
+                        0 0 40px rgba(255, 20, 147, 0.15);
+            max-width: 500px;
+            width: 100%;
+            padding: 50px 35px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .header {
+            margin-bottom: 35px;
+        }
+
+        .pikachu {
+            font-size: 90px;
+            margin-bottom: 25px;
+            animation: bounce 2s infinite, glow 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-25px) scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4)); }
+            50% { filter: drop-shadow(0 5px 20px rgba(255, 215, 0, 0.8)); }
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #FFD700, #FBC02D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #1DB954;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .big-heart {
+            font-size: 60px;
+            display: inline-block;
+            margin: 20px 0;
+            animation: heartbeat 1.2s infinite, pulse 2s infinite;
+            filter: drop-shadow(0 3px 10px rgba(255, 20, 147, 0.5));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            20% { transform: scale(1.3); }
+            40% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .love-message {
+            color: #FF1493;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .message {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .decoration-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            margin: 25px 0;
+            border-radius: 2px;
+        }
+
+        .spotify-container {
+            margin: 35px 0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(29, 185, 84, 0.1));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .spotify-container iframe {
+            border-radius: 12px;
+            max-width: 100%;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 35px 0;
+        }
+
+        .feature {
+            background: linear-gradient(135deg, #FFE082 0%, #FFF9C4 100%);
+            padding: 18px;
+            border-radius: 15px;
+            border: 2px solid #FBC02D;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .feature:nth-child(2) .feature-icon { animation-delay: 0.3s; }
+        .feature:nth-child(3) .feature-icon { animation-delay: 0.6s; }
+        .feature:nth-child(4) .feature-icon { animation-delay: 0.9s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature-text {
+            font-size: 13px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px solid #FFD700;
+            color: #555;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer-heart {
+            color: #FF1493;
+            font-size: 16px;
+            margin: 0 4px;
+            display: inline-block;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .stars {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #FFD700;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 35px 25px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .pikachu {
+                font-size: 75px;
+            }
+
+            .big-heart {
+                font-size: 50px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .love-message {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="falling-hearts" id="heartsContainer"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="pikachu">⚡</div>
+            <h1>¡Hola Mía! 👋</h1>
+            <p class="subtitle">Te amo muchísimo 💛</p>
+            
+            <div class="big-heart">❤️</div>
+            
+            <p class="love-message">
+                Este regalo es para que sepas cuánto te amo.<br>
+                Tu sonrisa ilumina mi vida, mi amor.
+            </p>
+
+            <div class="decoration-line"></div>
+            
+            <p class="message">Aquí está tu canción favorita y tu Pikachu especial, todo con el amor que siento por ti ✨</p>
+        </div>
+
+        <div class="spotify-container">
+            <iframe style="border-radius:12px" 
+                    src="https://open.spotify.com/embed/track/5XrIFnXkTNo4i61p7JypKO?utm_source=generator" 
+                    width="100%" 
+                    height="152" 
+                    frameBorder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+            </iframe>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">Pikachu</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎵</div>
+                <div class="feature-text">Tu canción</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💛</div>
+                <div class="feature-text">Con amor</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-text">Para ti</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="stars">✨ ✨ ✨</div>
+            <p>Escanea tu llavero NFC cuando quieras escuchar tu música 🎧</p>
+            <p style="margin-top: 12px; font-size: 16px;">
+                Te amo <span class="footer-heart">❤️</span> 
+                siempre, mi amor
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Crear corazones flotantes
+        function createFallingHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.textContent = '❤️';
+            
+            const randomX = Math.random() * 100;
+            const randomDelay = Math.random() * 2;
+            const randomDuration = 5 + Math.random() * 4;
+            
+            heart.style.left = randomX + '%';
+            heart.style.animationDelay = randomDelay + 's';
+            heart.style.animationDuration = randomDuration + 's';
+            
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, (randomDuration + randomDelay) * 1000);
+        }
+
+        // Generar corazones cada 0.8 segundos
+        setInterval(createFallingHeart, 800);
+
+        // Crear algunos corazones iniciales
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFallingHeart, i * 200);
+        }
+    </script>
+</body>
+</html>
