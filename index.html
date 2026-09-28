@@ -75,13 +75,34 @@
         .pikachu {
             font-size: 90px;
             margin-bottom: 25px;
-            animation: bounce 2s infinite, glow 2s infinite;
+            animation: bounce 2s infinite, glow 2s infinite, headbob 0.6s infinite;
             filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4));
+            position: relative;
+            display: inline-block;
+        }
+
+        .pikachu-with-headphones {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-25px) scale(1.05); }
+        }
+
+        @keyframes headbob {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(-3deg) translateY(-2px); }
+            75% { transform: rotate(3deg) translateY(-2px); }
+        }
+
+        @keyframes headbobphones {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-3deg) scale(1); }
+            75% { transform: rotate(3deg) scale(1); }
         }
 
         @keyframes glow {
@@ -158,11 +179,38 @@
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(29, 185, 84, 0.1));
             border-radius: 20px;
             border: 2px solid rgba(255, 215, 0, 0.2);
+            width: 100%;
+            min-height: 180px;
+        }
+
+        .spotify-wrapper {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .spotify-container iframe {
             border-radius: 12px;
-            max-width: 100%;
+            width: 100% !important;
+            max-width: 400px;
+            min-height: 152px;
+        }
+
+        .spotify-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #1DB954, #1ed760);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .spotify-link:hover {
+            transform: scale(1.05);
         }
 
         .features {
@@ -225,11 +273,29 @@
             animation: heartbeat 1.2s infinite;
         }
 
-        .stars {
-            font-size: 12px;
-            letter-spacing: 4px;
-            color: #FFD700;
-            margin: 5px 0;
+        .sound-waves {
+            position: absolute;
+            font-size: 20px;
+            animation: pulse-sound 1.5s infinite;
+        }
+
+        .wave1 { left: -30px; top: 20px; animation-delay: 0s; }
+        .wave2 { right: -30px; top: 20px; animation-delay: 0.3s; }
+        .wave3 { left: -40px; top: 0px; animation-delay: 0.6s; }
+        .wave4 { right: -40px; top: 0px; animation-delay: 0.6s; }
+
+        @keyframes pulse-sound {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
         }
 
         @media (max-width: 480px) {
@@ -265,7 +331,16 @@
 
     <div class="container">
         <div class="header">
-            <div class="pikachu">⚡</div>
+            <div style="position: relative; display: inline-block; margin-bottom: 20px;">
+                <div class="pikachu-with-headphones">
+                    <div class="pikachu" style="margin: 0;">⚡</div>
+                    <div style="font-size: 70px; animation: headbobphones 0.6s infinite;">🎧</div>
+                </div>
+                <div class="sound-waves wave1">🎵</div>
+                <div class="sound-waves wave2">🎵</div>
+                <div class="sound-waves wave3">♪</div>
+                <div class="sound-waves wave4">♪</div>
+            </div>
             <h1>¡Hola Mía! 👋</h1>
             <p class="subtitle">Te amo muchísimo 💛</p>
             
@@ -282,15 +357,19 @@
         </div>
 
         <div class="spotify-container">
-            <iframe style="border-radius:12px" 
+            <div class="spotify-wrapper">
+                <iframe 
                     src="https://open.spotify.com/embed/track/5XrIFnXkTNo4i61p7JypKO?utm_source=generator" 
-                    width="100%" 
-                    height="152" 
                     frameBorder="0" 
                     allowfullscreen="" 
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                     loading="lazy">
-            </iframe>
+                </iframe>
+            </div>
+            <p style="text-align: center; margin-top: 15px; font-size: 12px; color: #666;">
+                Si el reproductor no aparece, 
+                <a href="https://open.spotify.com/track/5XrIFnXkTNo4i61p7JypKO" target="_blank" style="color: #1DB954; text-decoration: none; font-weight: bold;">escucha aquí 🎵</a>
+            </p>
         </div>
 
         <div class="features">
